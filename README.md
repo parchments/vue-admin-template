@@ -1,4 +1,4 @@
-# vue2-admin-template-cli3
+# vue2-admin-template
 
 ## Project setup
 ```
