@@ -2,9 +2,10 @@
   <section>
     <div class="text-center mar-t-30">
       <div class="mar-b-30">
-        <img src="@/assets/images/logo.png"
-             alt=""
-             style="transform: rotate(-180deg);">
+        <img v-if="code === 'XMSJ'" width="400px" src="@/assets/images/xmsj.jpg">
+        <img v-if="code === 'HWSJ'" width="400px" src="@/assets/images/hwsj.png">
+        <img v-if="code === 'HMSJ'" width="400px" src="@/assets/images/hmsj.jpg">
+        <img v-if="code === 'RYSJ'" width="400px" src="@/assets/images/rysj.png">
       </div>
       <div class="mar-30"
            style="font-size: 30px">
