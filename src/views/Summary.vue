@@ -67,6 +67,10 @@
           <td>路由错误</td>
           <td>404</td>
         </tr>
+        <tr>
+          <td>兼容性</td>
+          <td>ie9及以上</td>
+        </tr>
       </tbody>
     </table>
   </div>
