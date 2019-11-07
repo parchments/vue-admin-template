@@ -1,5 +1,6 @@
 <template>
   <section class="wrapper">
+    <canvas id="canvas"></canvas>
     <div class="login-wrapper">
       <div class="text-center">
         <img src="@/assets/images/logo.png"
@@ -176,6 +177,49 @@ export default {
         ]
       }
     }
+  },
+  mounted() {
+	var canvas = document.getElementById('canvas')
+	var context = canvas.getContext('2d')
+	var W = window.innerWidth
+	var H = window.innerHeight
+	canvas.width = W
+	canvas.height = H
+	var fontSize = 18
+	var colunms = Math.floor(W/fontSize)
+	var drops = []
+	for(var i = 0; i<colunms; i++){
+		drops.push(0)
+	}
+	var str = 'javascript html5 canvas'
+	
+	// function draw(canvas,context,W,H,fontSize,colunms,str,drops){
+		
+	// }
+	// function randColor (){
+	// 	var r = Math.floor(Math.random() * 256)
+	// 	var g = Math.floor(Math.random() * 256)
+	// 	var b = Math.floor(Math.random() * 256)
+	// 	return "rgb(" + r + "," + g + "," + b + ")"
+	// }
+	// draw()
+	setInterval(()=>{
+		context.fillStyle = 'rgba(0,0,0,0.05)'
+		context.fillRect(0,0,W,H)
+		context.font = '0' + fontSize + 'px 微软雅黑'
+		context.fillStyle = '#00cc33'
+		for(var i = 0; i<colunms; i++){
+			var index = Math.floor(Math.random() * str.length)
+			var x = i * fontSize
+			var y = drops[i] * fontSize
+			context.fillText(str[index],x,y)
+			if(y >= canvas.height && Math.random() > 0.99){
+				drops[i] = 0
+			}else{
+				drops[i]++
+			}
+		}
+	},30)
   },
   created () {
     //针对点击浏览器的回退按钮时，若回退到的当前页面是登录页面，则清空localStorage的数据
@@ -373,9 +417,7 @@ export default {
         //请求登录参数
         let params = {
           account: this.codeForm.account, //手机号
-          code: this.codeForm.code, //验证码
-          ssxt: this.SSXT, //系统名称
-          type: 1 //1为管理员   2为会员
+          code: this.codeForm.code //验证码
         }
         this.successFunc(params, this.codeLoadingBtn)//执行验证通过函数
       }
@@ -386,9 +428,7 @@ export default {
       let params = {
         account: this.accountForm.account, //账号
         pwd: this.editPasswordForm.editPassword, //密码
-        rePwd: this.editPasswordForm.editPassword2, //再次密码
-        ssxt: this.SSXT, //系统名
-        type: 1 //传给后台的固定值,类型1为修改密码， 2为忘记密码
+        rePwd: this.editPasswordForm.editPassword2 //再次密码
       }
       this.editLoadingBtn = true
       this.$refs[formName].validate(valid => {
@@ -434,6 +474,15 @@ export default {
 }
 </script>
 <style scoped>
+#canvas{
+	background: #111;
+	z-index: 1;
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+}
 .wrapper {
   min-height: 100%;
   width: 100%;
@@ -442,11 +491,12 @@ export default {
 }
 .login-wrapper {
   position: relative;
-  width: 520px;
+  width: 400px;
   max-width: 100%;
   padding: 160px 35px 0;
   margin: 0 auto;
   overflow: hidden;
+  z-index: 2;
 }
 .form-wrapper {
   position: fixed;
