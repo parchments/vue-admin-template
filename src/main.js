@@ -4,6 +4,10 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import Config from '../config/config' //后台返回状态码
+import * as filters from './filter/filters' //全局过滤器
+Object.keys(filters).forEach(key => {
+    Vue.filter(key, filters[key])
+})
 
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'

@@ -7,6 +7,12 @@
                      label="商品"></el-table-column>
     <el-table-column prop="code"
                      label="商品代码"></el-table-column>
+    <el-table-column prop="time"
+                     label="时间">
+		<template slot-scope="scope">
+			{{ scope.row.time | formatDate('YYYY-MM-DD HH:mm:ss')}}
+		</template>
+	 </el-table-column>
     <el-table-column label="操作"
                      width="200">
       <template slot-scope="scope">

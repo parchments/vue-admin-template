@@ -9,6 +9,9 @@
       <span class="pad-10">
         <i class="el-icon-user"></i> parchments
       </span>
+	  <a href="https://github.com/parchments/vue-admin-template" target="_blank" style="color: #fff;" class="pad-10">
+		  <i class="el-icon-star-off"></i> gitHub
+	  </a>
       <span @click="logout"
             class="pad-10">
         <i class="el-icon-switch-button"></i> 退出

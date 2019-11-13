@@ -69,16 +69,20 @@ export default {
       //table数据
       tableData: [{
         name: '小米手机',
-        code: 'XMSJ'
+        code: 'XMSJ',
+		time: 1573625941000
       }, {
         name: '华为手机',
-        code: 'HWSJ'
+        code: 'HWSJ',
+		time: 1573009362000
       }, {
         name: '红米手机',
-        code: 'HMSJ'
+        code: 'HMSJ',
+		time: 1573193112000
       }, {
         name: '荣耀手机',
-        code: 'RYSJ'
+        code: 'RYSJ',
+		time: 1573610740000
       }],
       //弹窗
       addedEditorDialog: false,

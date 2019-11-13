@@ -1,5 +1,5 @@
 <template>
-  <div style="text-align: center; margin-top: 50px">
+  <div style="text-align: center; margin-top: 30px">
     <h1 style="font-size: 30px">基础模板概述</h1>
     <table>
       <tbody>
@@ -70,6 +70,10 @@
         <tr>
           <td>兼容性</td>
           <td>ie9及以上</td>
+        </tr>
+        <tr>
+          <td>时间格式化</td>
+          <td>moment</td>
         </tr>
       </tbody>
     </table>
