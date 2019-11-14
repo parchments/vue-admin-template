@@ -3,12 +3,9 @@
     <div class="logo">
       <img src="@/assets/images/logo.png"
            alt="">
-      <span>vue2-admin-template</span>
+      <span>vue-admin-template</span>
     </div>
     <div class="nav-button">
-      <span class="pad-10">
-        <i class="el-icon-user"></i> parchments
-      </span>
 	  <a href="https://github.com/parchments/vue-admin-template" target="_blank" style="color: #fff;" class="pad-10">
 		  <i class="el-icon-star-off"></i> gitHub
 	  </a>
