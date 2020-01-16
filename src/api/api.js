@@ -10,7 +10,7 @@ axios.defaults.baseURL = process.env.VUE_APP_BASEURL
 const systemModule = {
     //登录
     login (params) {
-        return axios.post(`login`, params)
+        return axios.post("login", params)
     }
 }
 
@@ -20,7 +20,7 @@ const qualityControl = {
     goodsManage: {
         //列表、查询
         getList (params) {
-            return axios.post(`/goodList`, params)
+            return axios.post("/goodList", params)
         }
     }
 }

@@ -4,12 +4,8 @@ footer {
 	box-sizing: border-box;
 	margin: 0;
 }
-html {
-	height: 100%;
-}
 body {
 	margin: 0 auto;
-	height: 100%;
 	color: #333;
 	background-color: #fff;
 	font-size: 14px;
@@ -63,13 +59,6 @@ img {
 .text-right {
 	text-align: right;
 }
-.fr {
-	float: left;
-}
-.font-weight-b {
-	font-weight: bold;
-}
-
 /*定义基础字号*/
 .color-000 {
 	color: #000;
