@@ -12,6 +12,7 @@ Object.keys(filters).forEach(key => {
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import './assets/css/base.css' //基础样式
+import './assets/less/nav.less' //导航样式
 
 import Api from './api/api' //导入api接口
 import Axios from './request/http' //导入axios请求

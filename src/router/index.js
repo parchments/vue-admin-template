@@ -1,92 +1,109 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
-
-/**
- * 官方 component: () => import('../views/login/Login')
- * webpack懒加载  component: r => require.ensure([], () => r(require('../views/login/Login')), 'Login'),
- * import加载所有 import Login from '../views/login/Login'
- */
-
-Vue.use(VueRouter)
+import Vue from "vue";
+import VueRouter from "vue-router";
+import Home from "../views/Home.vue";
+Vue.use(VueRouter);
 
 const routes = [
     {
-        path: '/',
-        name: 'login',
-        component: () => import('../views/login/Login'),
+        path: "*", //输错路由回首页
+        redirect: "/404",
+        hidden: true,
         meta: {
+			title: "输错路由回首页",
             keepAlive: false,
-            title: '登录'
+            level: 0 //判断是否缓存 0为不缓存 1为缓存 2为详情页
         }
     },
     {
-        path: '*',//输错路由前往404
-        redirect: '/404',
+        path: "/", //默认路由
+        redirect: "/login",
+        hidden: true,
         meta: {
+			title: "默认路由",
             keepAlive: false,
-            title: '404'
+            level: 0
+        }
+    },
+    //登录
+    {
+        path: "/login",
+        name: "login",
+        component: r => require.ensure([], () => r(require("../views/login/Login.vue")), "Login"),
+        hidden: true,
+        meta: {
+			title: "登录",
+            keepAlive: false,
+            level: 0
+        }
+    },
+    //404
+    {
+        path: "/404",
+        name: "notFound",
+        component: r => require.ensure([], () => r(require("../views/error/NotFound.vue")), "NotFound"),
+        hidden: true,
+        meta: {
+			title: "404",
+            keepAlive: false,
+            level: 0
         }
     },
     {
-        path: '/404',
-        name: 'notFound',
-        component: () => import('../views/error/NotFound'),
+        path: "/home",
+        name: "home",
+        component: Home,
+        redirect: '/summarys/index',
+        hidden: true,
         meta: {
+			title: "首页",
             keepAlive: false,
-            title: '404'
+            level: 0
         }
     },
     {
-        path: '/home',
-        name: 'home',
-        redirect: '/summary',
-        component: () => import('../views/home/Index'),
-        meta: {
+        path: "/summarys",
+        component: Home,
+        iconCls: "fa el-icon-s-data",
+		hidden: false,
+		meta: {
+			title: "简介",
             keepAlive: false,
-            title: '首页'
-        },
+            level: 0
+		},
         children: [
             {
-                path: '/summary',
-                name: 'summary',
-                // route level code-splitting
-                // this generates a separate chunk (about.[hash].js) for this route
-                // which is lazy-loaded when the route is visited.
-                component: () => import('../views/Summary'),
-                meta: {//缓存、路由元信息、元字段
-                    keepAlive: false,
-                    title: '概述',
-                    //requiresAuth: true
+                path: "/summarys/index",
+                component: () => import("../views/summarys/index.vue"),
+                name: "summarys",
+				hidden: false,
+                meta: {
+					title: "简介首页",
+					keepAlive: false,
+					level: 0
                 }
             },
             {
-                path: '/doc',
-                name: 'doc',
-                component: () => import('../views/Doc'),
+                path: "/goods/goodsList",
+                component: () => import("../views/goods/goodsList.vue"),
+                name: "goodsList",
+				hidden: false,
                 meta: {
-                    keepAlive: false,
-                    title: '文档'
+					title: "商品列表",
+					keepAlive: false,
+					level: 0
                 }
             },
             {
-                path: '/good-list',
-                name: 'goodList',
-                component: () => import('../views/good-list/GoodList'),
+                path: "/goods/goodsList/goodsDetail",
+                component: () => import("../views/goods/goodsDetail.vue"),
+                name: "goodsDetail",
+				hidden: true,
                 meta: {
-                    keepAlive: false,
-                    title: '商品列表'
-                },
-                children: []
-            },
-            {
-                path: '/good-list/good-detail',
-                name: 'goodDetail',
-                component: () => import('../views/good-list/GoodDetail'),
-                meta: {
-                    keepAlive: false,
-                    title: '商品详情',
-                    parentPath: '/good-list',
-                    parentTitle: '商品列表'
+					title: "商品列表",
+					parentPath: "/goods/goodsList",
+					parentTitle: "商品列表",
+					keepAlive: false,
+					level: 0
                 }
             }
         ]
@@ -94,8 +111,19 @@ const routes = [
 ]
 
 const router = new VueRouter({
-    // 	mode: 'history',
+    mode: "history",
     base: process.env.BASE_URL,
     routes
-})
-export default router
+});
+
+//全局路由守卫、路由拦截
+// router.beforeEach((to, from, next) => {
+//     const isLogin = localStorage.token ? true : false;
+//     if (to.path === "/login" || to.path === "/forgotPassword") {
+//         next();
+//     } else {
+//         isLogin ? next() : next("/");
+//     }
+// });
+
+export default router;

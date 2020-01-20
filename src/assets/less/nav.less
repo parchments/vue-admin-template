@@ -1,0 +1,42 @@
+/* 导航样式 */
+.el-menu {
+	height: 100%;
+	overflow: auto;
+	background: #304156;
+}
+.el-menu-item,.el-submenu__title {
+  height: auto !important;
+}
+.el-submenu {
+  background: rgb(48, 65, 86);
+  .el-submenu__title {
+	color: rgb(191, 203, 217);
+	text-align: left;
+	&:hover {
+	  background: #001528 !important;
+	}
+  }
+}
+.el-menu-item {
+  background: #1f2d3d !important;
+  color: rgb(191, 203, 217) !important;
+  text-align: left;
+  &:hover {
+	background: #001528 !important;
+  }
+}
+.el-submenu .el-submenu__title {
+  color: #bfcbd9;
+}
+.el-menu-item.is-active {
+  color: #1890ff !important;
+}
+.el-submenu__title i {
+  color: #bfcbd9 !important;
+  font-size: 18px;
+}
+.el-menu-item [class^="fa"],
+.el-submenu [class^="fa"] {
+  vertical-align: middle;
+  margin-right: 10px;
+}

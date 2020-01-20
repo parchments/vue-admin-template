@@ -23,7 +23,7 @@
         <el-button type="text"
                    size="small"
                    class="mar-r-20">
-          <router-link :to="{path: 'good-list/good-detail',query: {code: scope.row.code}}">详情</router-link>
+          <router-link :to="{path: '/goods/goodsList/goodsDetail',query: {code: scope.row.code}}">详情</router-link>
         </el-button>
         <el-button type="text"
                    size="small"

@@ -25,7 +25,7 @@
 <script>
 
 export default {
-  name: 'goodDetail',
+  name: 'goodsDetail',
   data () {
     return {
       code: this.$route.query.code

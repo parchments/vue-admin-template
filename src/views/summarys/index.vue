@@ -83,6 +83,11 @@
     </table>
   </div>
 </template>
+<script>
+	export default {
+	  name: 'summarys'
+	}
+</script>
 <style lang="less" scoped>
 table {
   margin: 0 auto;

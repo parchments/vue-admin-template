@@ -3,24 +3,43 @@
     <admin-header></admin-header>
     <section class="layout-container">
       <el-aside class="aside">
-        <nav-menu></nav-menu>
+        <el-menu :default-active="$route.fullPath"
+        		 :unique-opened="true"
+        		 router
+        		 element-loading-text="拼命加载中"
+        		 element-loading-spinner="el-icon-loading"
+        		 element-loading-background="#304156">
+          <!-- $router.options.routes到时候可以从后台动态获取菜单 -->
+          <template v-for="(item, index) in $router.options.routes">
+        	<template>
+        	  <el-submenu v-if="item.children && !item.hidden" :key="index" :index="index + ''">
+        		<template slot="title">{{ item.meta.title }}</template>
+        		<div v-for="(child, index) in item.children" :index="child.path" :key="child.path">
+        		  <template v-if="child.children">
+        			<el-submenu :index="index + ''">
+        			  <template slot="title">{{ child.meta.title }}</template>
+        			  <el-menu-item v-for="grandson in child.children" :index="`${grandson.path}`" :key="grandson.path">{{ grandson.meta.title }}</el-menu-item>
+        			</el-submenu>
+        		  </template>
+        		  <el-menu-item :index="`${child.path}`" :key="child.path" v-if="!child.children && !child.hidden">{{ child.meta.title }}</el-menu-item>
+        		</div>
+        	  </el-submenu>
+        	  <el-menu-item v-if="!item.children && !item.hidden" :key="index" :index="item.path">{{ item.meta.title }}</el-menu-item>
+        	</template>
+          </template>
+        </el-menu>
       </el-aside>
       <el-main class="main-container">
         <div class="pad-t-10 pad-b-30 pad-l-10">
+			<!-- 面包屑可抽成一个组件 -->
           <el-breadcrumb separator-class="el-icon-arrow-right">
             <el-breadcrumb-item to="/home">首页</el-breadcrumb-item>
-            <el-breadcrumb-item v-for="item in levelList"
-                                :key="item.path"
-                                class="el-breadcrumb__inner">
-              <router-link v-if="item.meta.parentPath"
-                           :to="item.meta.parentPath"
-                           class="set-hover-color">
+            <el-breadcrumb-item v-for="item in levelList" :key="item.path" class="el-breadcrumb__inner">
+              <router-link v-if="item.meta.parentPath" :to="item.meta.parentPath" class="set-hover-color">
                 {{item.meta.parentTitle}}
-                <i class="el-icon-arrow-right"
-                   style="margin: 0 6px;color: #C0C4CC;"></i>
+                <i class="el-icon-arrow-right" style="margin: 0 6px;color: #C0C4CC;"></i>
               </router-link>
-              <router-link else
-                           :to="item.path">{{item.meta.title}}</router-link>
+              <router-link else to="item.path">{{item.meta.title}}</router-link>
             </el-breadcrumb-item>
           </el-breadcrumb>
         </div>
@@ -43,7 +62,7 @@ export default {
     }
   },
   created () {
-    console.log('路由', this.$route)
+    // console.log('路由', this.$router.options.routes)
   },
   watch: {
     $route (to, from) {
@@ -62,9 +81,9 @@ export default {
         //console.log(item)
         return item.name !== 'home'
       })
-      console.log('过滤', matched)
-      const first = matched[0]
-      this.levelList = matched
+      console.log('过滤', this.$route)
+      // const first = matched[0]
+      // this.levelList = matched
     }
   },
   components: {

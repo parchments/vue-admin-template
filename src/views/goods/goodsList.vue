@@ -49,7 +49,7 @@ import Pagination from '@/components/Pagination'
 import AddedEditorDialog from './components/AddedEditorDialog'
 
 export default {
-  name: 'goodList',
+  name: 'goodsList',
   components: {
     'ph-pagination': Pagination,
     'added-editor-dialog': AddedEditorDialog,
