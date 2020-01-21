@@ -34,7 +34,7 @@
 			<!-- 面包屑可抽成一个组件 -->
           <el-breadcrumb separator-class="el-icon-arrow-right">
             <el-breadcrumb-item to="/home">首页</el-breadcrumb-item>
-            <el-breadcrumb-item v-for="item in levelList" :key="item.path" class="el-breadcrumb__inner">
+            <el-breadcrumb-item v-for="item in levelList" :key="item.path" class="el-breadcrumb__inner">{{item}}
               <router-link v-if="item.meta.parentPath" :to="item.meta.parentPath" class="set-hover-color">
                 {{item.meta.parentTitle}}
                 <i class="el-icon-arrow-right" style="margin: 0 6px;color: #C0C4CC;"></i>
@@ -78,12 +78,10 @@ export default {
      */
     getBreadcrumb () {
       let matched = this.$route.matched.filter(item => {
-        //console.log(item)
-        return item.name !== 'home'
+        return item.path !== '/home'
       })
-      console.log('过滤', this.$route)
-      // const first = matched[0]
-      // this.levelList = matched
+      console.log('过滤', matched)
+      this.levelList = matched
     }
   },
   components: {

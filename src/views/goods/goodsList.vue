@@ -58,8 +58,6 @@ export default {
   },
   data () {
     return {
-      SUCCESS_CODE: this.$config.RET_CODE.SUCCESS_CODE,//请求成功的值
-      ERROR_CODE: this.$config.RET_CODE.ERROR_CODE,//请求失败的值
       loading: false,//loading
       submitLoading: false,//弹窗提交loading
       paginationParams: this.$config.paginationParams,//列表分页
@@ -109,10 +107,11 @@ export default {
       * desc:封装初始化获取列表和搜索  共用
     */
     async successList (params) {
+	  return this.$message.error("请配置接口!");
       this.loading = true//loading
-      let res = await this.$api.qualityControl.goodsManage.getList(params)
+      let res = await this.$api.systemModule.goodsManage.getList(params)
       let data = res.data.data
-      if (res.data.retcode === this.SUCCESS_CODE) {
+      if (res.data.retcode === this.$config.RET_CODE.SUCCESS_CODE) {
         this.loading = false
         if (data.rows.length > 0) {
           this.isBatchDeleteDisabled = false//启用批量删除
@@ -142,12 +141,8 @@ export default {
       * desc:获取表格数据
     */
     getList () {
-      return this.$message({
-        type: 'error',
-        message: '请先配置接口哦'
-      })
+	  return this.$message.error("请配置接口!");
       let params = {
-        aliveFlag: 'Y',//状态--必填
         pageNo: this.paginationParams.pageNo,//页码
         pageSize: this.paginationParams.pageSize//每页条数
       }
@@ -161,11 +156,9 @@ export default {
     */
     searchBtn (searchData) {
       let params = {
-        aliveFlag: 'Y',//状态--必填
         pageNo: this.paginationParams.pageNo,//页码
         pageSize: this.paginationParams.pageSize,//每页条数
         name: searchData && searchData.name ? searchData.name : null,
-        code: searchData && searchData.code ? searchData.code : null
       }
       //列表成功请求
       this.successList(params)
@@ -178,11 +171,9 @@ export default {
     sendPaginationsHandle () {
       if (this.searchForm.name !== '' || this.searchForm.code !== '') {
         let params = {
-          aliveFlag: 'Y',//状态--必填
           pageNo: this.paginationParams.pageNo,//页码
           pageSize: this.paginationParams.pageSize,//每页条数
           name: this.searchForm && this.searchForm.name !== '' ? this.searchForm.name : null,
-          code: this.searchForm && this.searchForm.code !== '' ? this.searchForm.code : null,
         }
         //发送请求
         this.successList(params)
@@ -236,15 +227,12 @@ export default {
         code: row.code,
         id: row.id
       }
-      return this.$message({
-        type: 'error',
-        message: '请先配置接口哦'
-      })
       //请求接口
       let params = row.id
-      this.$api.qualityControl.goodsManage.getDataById(params)
+	  return this.$message.error("请配置接口!");
+      this.$api.systemModule.goodsManage.getDataById(params)
         .then(res => {
-          if (res.data.retcode === this.SUCCESS_CODE) {
+          if (res.data.retcode === this.$config.RET_CODE.SUCCESS_CODE) {
             let data = res.data.data
             //设置传给后台的数据
             this.dialogForm = {
@@ -275,20 +263,17 @@ export default {
         type: 'warning',
         center: true
       }).then(() => {
-        return this.$message({
-          type: 'error',
-          message: '请先配置接口哦'
-        })
+		return this.$message.error("请配置接口!");
         //请求删除账号接口
-        this.$api.qualityControl.goodsManage.batchEdit(params)
+        this.$api.systemModule.goodsManage.batchEdit(params)
           .then(res => {
-            if (res.data.retcode === this.SUCCESS_CODE) {
+            if (res.data.retcode === this.$config.RET_CODE.SUCCESS_CODE) {
               this.$message({
                 type: 'success',
                 message: res.data.retmsg
               })
               this.getList()
-            } else if (res.data.retcode === this.ERROR_CODE) {
+            } else {
               this.$message({
                 type: 'error',
                 message: res.data.retmsg
@@ -348,17 +333,14 @@ export default {
       * desc:新增、修改弹窗提交
     */
     submitAddedEditorForm () {
-      return this.$message({
-        type: 'error',
-        message: '请先配置接口哦'
-      })
+	  return this.$message.error("请配置接口!");
       this.submitLoading = true
       let params = this.dialogForm
       if (this.handleType === 'add') {
         //添加
-        this.$api.qualityControl.goodsManage.add(params)
+        this.$api.systemModule.goodsManage.add(params)
           .then(res => {
-            if (res.data.retcode === this.SUCCESS_CODE) {
+            if (res.data.retcode === this.$config.RET_CODE.SUCCESS_CODE) {
               this.submitLoading = false
               this.$message({
                 message: res.data.retmsg,
@@ -380,10 +362,11 @@ export default {
             this.submitLoading = false
           })
       } else if (this.handleType === 'edit') {
+		return this.$message.error("请配置接口!");
         //编辑
-        this.$api.qualityControl.goodsManage.edit(params)
+        this.$api.systemModule.goodsManage.edit(params)
           .then(res => {
-            if (res.data.retcode === this.SUCCESS_CODE) {
+            if (res.data.retcode === this.$config.RET_CODE.SUCCESS_CODE) {
               this.submitLoading = false
               this.$message({
                 type: "success",

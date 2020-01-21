@@ -61,12 +61,12 @@ const routes = [
         }
     },
     {
-        path: "/summarys",
+        path: "/home",
         component: Home,
         iconCls: "fa el-icon-s-data",
 		hidden: false,
 		meta: {
-			title: "简介",
+			title: "框架简介",
             keepAlive: false,
             level: 0
 		},
@@ -77,37 +77,98 @@ const routes = [
                 name: "summarys",
 				hidden: false,
                 meta: {
-					title: "简介首页",
-					keepAlive: false,
-					level: 0
-                }
-            },
-            {
-                path: "/goods/goodsList",
-                component: () => import("../views/goods/goodsList.vue"),
-                name: "goodsList",
-				hidden: false,
-                meta: {
-					title: "商品列表",
-					keepAlive: false,
-					level: 0
-                }
-            },
-            {
-                path: "/goods/goodsList/goodsDetail",
-                component: () => import("../views/goods/goodsDetail.vue"),
-                name: "goodsDetail",
-				hidden: true,
-                meta: {
-					title: "商品列表",
-					parentPath: "/goods/goodsList",
-					parentTitle: "商品列表",
+					title: "框架简介",
 					keepAlive: false,
 					level: 0
                 }
             }
         ]
-    }
+    },
+    {
+        path: "/home",
+        component: Home,
+        iconCls: "fa el-icon-s-data",
+		hidden: false,
+		meta: {
+			title: "列表详情",
+            keepAlive: false,
+            level: 0
+		},
+        children: [
+			{
+				path: "/goods/goodsList",
+				component: () => import("../views/goods/goodsList.vue"),
+				name: "goodsList",
+				hidden: false,
+				meta: {
+					title: "列表",
+					keepAlive: false,
+					level: 0
+				}
+			},
+			{
+				path: "/goods/goodsList/goodsDetail",
+				component: () => import("../views/goods/goodsDetail.vue"),
+				name: "goodsDetail",
+				hidden: true,
+				meta: {
+					title: "详情",
+					parentPath: "/goods/goodsList",
+					parentTitle: "商品列表",
+					keepAlive: false,
+					level: 0
+				}
+			}
+        ]
+    },
+    {
+        path: "/home",
+        component: Home,
+        iconCls: "fa el-icon-s-data",
+		hidden: false,
+		meta: {
+			title: "上传导入",
+            keepAlive: false,
+            level: 0
+		},
+        children: [
+            {
+                path: "/upload/index",
+                component: () => import("../views/upload/index.vue"),
+                name: "upload",
+				hidden: false,
+                meta: {
+					title: "自定义上传导入",
+					keepAlive: false,
+					level: 0
+                }
+            }
+        ]
+    },
+    {
+        path: "/home",
+        component: Home,
+        iconCls: "fa el-icon-s-data",
+		hidden: false,
+		meta: {
+			title: "表单校验",
+            keepAlive: false,
+            level: 0
+		},
+        children: [
+            {
+                path: "/formValidation/index",
+                component: () => import("../views/formValidation/index.vue"),
+                name: "formValidation",
+				hidden: false,
+                meta: {
+					title: "校验动态下拉",
+					keepAlive: false,
+					level: 0
+                }
+            }
+        ]
+    },
 ]
 
 const router = new VueRouter({
