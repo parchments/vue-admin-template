@@ -34,12 +34,12 @@
 			<!-- 面包屑可抽成一个组件 -->
           <el-breadcrumb separator-class="el-icon-arrow-right">
             <el-breadcrumb-item to="/home">首页</el-breadcrumb-item>
-            <el-breadcrumb-item v-for="item in levelList" :key="item.path" class="el-breadcrumb__inner">{{item}}
+            <el-breadcrumb-item v-for="item in levelList" :key="item.path" class="el-breadcrumb__inner">
               <router-link v-if="item.meta.parentPath" :to="item.meta.parentPath" class="set-hover-color">
                 {{item.meta.parentTitle}}
                 <i class="el-icon-arrow-right" style="margin: 0 6px;color: #C0C4CC;"></i>
               </router-link>
-              <router-link else to="item.path">{{item.meta.title}}</router-link>
+              <span else :to="item.path">{{item.meta.title}}</span>
             </el-breadcrumb-item>
           </el-breadcrumb>
         </div>
@@ -80,7 +80,6 @@ export default {
       let matched = this.$route.matched.filter(item => {
         return item.path !== '/home'
       })
-      console.log('过滤', matched)
       this.levelList = matched
     }
   },
